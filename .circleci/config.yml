@@ -14,7 +14,6 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:latest .
       - run:
-          context: do-sample-kubernetes-app
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
@@ -24,6 +23,7 @@ workflows:
   build-master:
     jobs:
       - build:
+          context: do-sample-kubernetes-app
           filters:
             branches:
               only: master
